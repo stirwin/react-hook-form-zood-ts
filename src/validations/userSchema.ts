@@ -41,4 +41,11 @@ export const userSchema= z.object({
         errorMap: () => ({message: 'debe seleccionar un plan'})
     }),
 
+    cumple: z.string().refine(dob => new Date(dob).toString() !=='Invalid Date',{
+        message:'la fecha de nacimiento no es valida'
+    }),
+
+}).refine(data=>data.password===data.confirmPassword,{
+    message:'las contrasenias no coinciden',
+    path:['confirmPassword']
 });
